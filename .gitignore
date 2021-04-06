@@ -1,0 +1,6 @@
+# 项目排除路径
+/jonesun-admin/target/
+/jonesun-common/target/
+/jonesun-demo/target/
+/jonesun-gateway/target/
+/jonesun-user-api/target/

@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: jonesun-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+#    loadbalancer:
+#      ribbon:
+#        enabled: false
+
+    gateway:
+      discovery:
+        locator:
+          # 是否和服务注册与发现组件结合，设置为 true 后可以直接使用应用名称调用服务
+          enabled: true
+          lower-case-service-id: true #使用小写service-id
+
+      routes:
+        # 路由标识
+        - id: jonesun-user-api
+          # 目标服务地址（uri：地址，请求转发后的地址）
+          uri: lb://jonesun-user-api
+          # 路由条件
+          predicates:
+            # 转发地址格式
+            - Path=/api/**
+          # 截取路径位数
+          filters:
+            - StripPrefix= 1
+server:
+  port: 8102
