@@ -5,16 +5,26 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-#    loadbalancer:
-#      ribbon:
-#        enabled: false
+    loadbalancer:
+      ribbon:
+        enabled: false
+
+    sentinel:
+      transport:
+        dashboard: localhost:8105  #sentinel的图形化界面访问路径
+      scg:
+        fallback: #服务降级返回的响应结果
+          mode: reponse
+          response-status: 426
+          response-body: error request
 
     gateway:
       discovery:
         locator:
           # 是否和服务注册与发现组件结合，设置为 true 后可以直接使用应用名称调用服务
-          enabled: true
+          enabled: true  #开启表示根据微服务名称映射，就是微服务名称拼接到url中可以直接访问，但是不推荐这么使用 容易暴露微服务
           lower-case-service-id: true #使用小写service-id
+      enabled: true #默认开启网关true，关闭网关false
 
       routes:
         # 路由标识

@@ -4,3 +4,12 @@
 /jonesun-demo/target/
 /jonesun-gateway/target/
 /jonesun-user-api/target/
+/boot.log
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+/jonesun-demo/vuedemo/build/
+/jonesun-user-server/target/

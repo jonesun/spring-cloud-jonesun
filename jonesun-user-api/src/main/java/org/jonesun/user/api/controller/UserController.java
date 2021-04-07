@@ -1,13 +1,12 @@
 package org.jonesun.user.api.controller;
 
-import org.jonesun.user.api.entity.User;
-import org.jonesun.user.api.entity.UserForm;
-import org.jonesun.user.api.service.UserService;
+import org.jonesun.user.api.fegin.UserApiFeign;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 用户接口
@@ -19,21 +18,20 @@ import java.util.List;
 @RequestMapping("/api")
 public class UserController {
 
-    private final UserService userService;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    private final UserApiFeign userApiFeign;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserApiFeign userApiFeign) {
+        this.userApiFeign = userApiFeign;
     }
 
-    @PostMapping("users")
-    public boolean register(@Valid @RequestBody UserForm userForm) {
-        return userService.insert(userForm);
-    }
 
     @GetMapping("users")
-    public List<User> list() {
-        return userService.selectList();
+    public Object list() {
+        logger.info("获取用户列表");
+        return userApiFeign.list();
     }
 
 }
