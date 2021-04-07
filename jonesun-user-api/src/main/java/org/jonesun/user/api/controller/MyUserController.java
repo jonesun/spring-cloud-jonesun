@@ -1,6 +1,6 @@
 package org.jonesun.user.api.controller;
 
-import org.jonesun.user.api.fegin.UserApiFeign;
+import org.jonesun.user.api.fegin.MyUserApiFeign;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,22 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api")
-public class UserController {
+public class MyUserController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final UserApiFeign userApiFeign;
+    private final MyUserApiFeign myUserApiFeign;
 
     @Autowired
-    public UserController(UserApiFeign userApiFeign) {
-        this.userApiFeign = userApiFeign;
+    public MyUserController(MyUserApiFeign myUserApiFeign) {
+        this.myUserApiFeign = myUserApiFeign;
     }
-
 
     @GetMapping("users")
     public Object list() {
         logger.info("获取用户列表");
-        return userApiFeign.list();
+        return myUserApiFeign.list();
     }
 
 }

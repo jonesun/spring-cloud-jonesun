@@ -18,15 +18,15 @@ import org.springframework.stereotype.Component;
  * 2021/4/6 10:33
  */
 @Component // 不要忘记添加
-public class DeptClientServiceFallbackFactory implements FallbackFactory<UserApiFeign> {
+public class DeptClientServiceFallbackFactory implements FallbackFactory<MyUserApiFeign> {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
     @Override
-    public UserApiFeign create(Throwable throwable) {
+    public MyUserApiFeign create(Throwable throwable) {
         return () -> {
-            logger.error("服务不可用，返回异常");
+            logger.error("服务不可用，返回异常", throwable);
             return "返回异常";
         };
     }

@@ -12,6 +12,7 @@ spring:
     sentinel:
       transport:
         dashboard: localhost:8105  #sentinel的图形化界面访问路径
+        port: 8719
       scg:
         fallback: #服务降级返回的响应结果
           mode: reponse
@@ -38,5 +39,18 @@ spring:
           # 截取路径位数
           filters:
             - StripPrefix= 1
+        - id: jonesun-file-center
+          # 目标服务地址（uri：地址，请求转发后的地址）
+          uri: lb://jonesun-file-center
+          # 路由条件
+          predicates:
+            # 转发地址格式
+            - Path=/api/**
+          # 截取路径位数
+          filters:
+            - StripPrefix= 1
 server:
   port: 8102
+feign:
+  sentinel:
+    enabled: true

@@ -6,6 +6,28 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+#    loadbalancer:
+#      ribbon:
+#        enabled: false
+    sentinel:
+      transport:
+        dashboard: localhost:8105  #sentinel的图形化界面访问路径
+        port: 8719
 
 server:
   port: 8104
+
+logging:
+  level:
+    org:
+      jonesun:
+        user:
+          api: debug
+feign:
+  sentinel:
+    enabled: true
+  compression:
+    request:
+      enabled: true # 开启请求压缩
+    response:
+      enabled: true
