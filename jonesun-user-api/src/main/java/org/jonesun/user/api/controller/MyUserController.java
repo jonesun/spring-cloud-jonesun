@@ -4,6 +4,8 @@ import org.jonesun.user.api.fegin.MyUserApiFeign;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,11 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @author jone.sun
  * 2021/3/18 10:24
  */
+@RefreshScope
 @RestController
 @RequestMapping("/api")
 public class MyUserController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Value("${nacos.config:null}")
+    private String config;
 
     private final MyUserApiFeign myUserApiFeign;
 
@@ -29,7 +35,7 @@ public class MyUserController {
 
     @GetMapping("users")
     public Object list() {
-        logger.info("获取用户列表");
+        logger.info("获取用户列表, {}", config);
         return myUserApiFeign.list();
     }
 
