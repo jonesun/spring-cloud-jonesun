@@ -1,8 +1,8 @@
 server:
   port: 8106
 spring:
-  #  profiles:
-  #    active: dev
+  profiles:
+    active: dev
   application:
     name: jonesun-oauth2-auth
   cloud:
@@ -16,6 +16,12 @@ spring:
     port: 6379
     host: 127.0.0.1
     password: 123456
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 
 #  # h2配置(日常开发改为mysql配置即可)

@@ -40,7 +40,7 @@ public class ClientServiceImpl implements ClientService {
         // 1、密码模式
         clientList.add(Client.builder()
                 .clientId("client-app")
-                .resourceIds("oauth2-resource,jonesun-user-api")
+                .resourceIds("oauth2-resource")
                 .secretRequire(false)
                 .clientSecret(clientSecret)
                 .scopeRequire(false)
@@ -59,7 +59,7 @@ public class ClientServiceImpl implements ClientService {
                 .scopeRequire(false)
                 .scope("all")
                 .authorizedGrantTypes("authorization_code,refresh_token")
-                .webServerRedirectUri("https://jonesun.github.io.cn,https://www.baidu.com")
+                .webServerRedirectUri("https://jonesun.github.io,https://www.baidu.com")
                 .authorities("USER")
                 .accessTokenValidity(3600)
                 .refreshTokenValidity(86400).build());

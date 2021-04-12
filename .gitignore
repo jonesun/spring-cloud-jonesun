@@ -13,3 +13,4 @@
 *.ipr
 /jonesun-demo/vuedemo/build/
 /jonesun-user-server/target/
+/jonesun-oauth2-auth/target/
