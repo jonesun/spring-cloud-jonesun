@@ -1,6 +1,8 @@
 package org.jonesun.user.api.controller;
 
+import org.jonesun.user.api.domain.UserDTO;
 import org.jonesun.user.api.fegin.MyUserApiFeign;
+import org.jonesun.user.api.holder.LoginUserHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,19 @@ public class MyUserController {
     public Object list() {
         logger.info("获取用户列表, {}", config);
         return myUserApiFeign.list();
+    }
+
+    @Autowired
+    private LoginUserHolder loginUserHolder;
+
+    @GetMapping("/currentUser")
+    public UserDTO currentUser() {
+        return loginUserHolder.getCurrentUser();
+    }
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello World !";
     }
 
 }

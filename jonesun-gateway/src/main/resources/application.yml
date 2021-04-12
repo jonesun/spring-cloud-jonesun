@@ -39,16 +39,54 @@ spring:
           # 截取路径位数
           filters:
             - StripPrefix= 1
-        - id: jonesun-file-center
-          # 目标服务地址（uri：地址，请求转发后的地址）
-          uri: lb://jonesun-file-center
-          # 路由条件
+#        - id: oauth2-resource-route
+#          uri: lb://oauth2-resource
+#          predicates:
+#            - Path=/resource/**
+#          filters:
+#            - StripPrefix=1
+        - id: oauth2-auth-route
+          uri: lb://jonesun-oauth2-auth
           predicates:
-            # 转发地址格式
-            - Path=/api/**
-          # 截取路径位数
+            - Path=/auth/**
           filters:
-            - StripPrefix= 1
+            - StripPrefix=1
+        - id: oauth2-auth-login
+          uri: lb://jonesun-oauth2-auth
+          predicates:
+            - Path=/login
+          filters:
+            - PreserveHostHeader
+        - id: oauth2-auth-token
+          uri: lb://jonesun-oauth2-auth
+          predicates:
+            - Path=/oauth/token
+          filters:
+            - PreserveHostHeader
+        - id: oauth2-auth-authorize
+          uri: lb://jonesun-oauth2-auth
+          predicates:
+            - Path=/oauth/authorize
+          filters:
+            - PreserveHostHeader
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: 'http://localhost:8106/rsa/publicKey' #配置RSA的公钥访问地址
+  redis:
+    database: 0
+    port: 6379
+    host: 127.0.0.1
+    password: 123456
+secure:
+  ignore:
+    urls: # 配置白名单路径
+      - "/actuator/**"
+      - "/oauth/token"
+      - "/oauth/authorize"
+      - "/login"
+      - "/jonesun-user-api/api/hello"
 server:
   port: 8102
 feign:
