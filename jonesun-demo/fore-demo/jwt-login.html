@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页</title>
+    <script src="js/jquery-3.5.1.js"></script>
+
+    <script src="js/jquery.form.min.js"></script>
+</head>
+<body>
+<h1>登录页</h1>
+<form id="loginForm" action="http://localhost:8102/oauth/token" method="post">
+    <input type="hidden" name="grant_type" value="password" />
+    <input type="hidden" name="client_id" value="client-app" />
+    <input type="hidden" name="client_secret" value="123456" />
+    <div>
+        <input type="text" name="username" placeholder="Username" value="admin"/>
+    </div>
+    <div>
+        <input type="password" name="password" placeholder="Password" value="123456"/>
+    </div>
+    <input id="submitBtn" type="submit" value="登录" />
+</form>
+<input id="myBtn" type="button" value="模拟json登录" />
+<script>
+
+    $(function () {
+        $('#loginForm').ajaxForm({
+            beforeSubmit: validate,
+            xhrFields: {withCredentials: true},    //前端适配：允许session跨域
+            crossDomain: true,
+            success: function(result) {
+                //返回数据处理
+                console.log(result);
+                test(result.data.tokenHead + result.data.token);
+            },
+            error: function (ex) {
+                alert(ex);
+                console.log(ex);
+            }
+        });
+
+        $("#myBtn").click(function(){
+            $.ajax({
+                type:"post",
+                crossDomain: true,
+                xhrFields: {
+                    withCredentials: true
+                },
+                url:"http://localhost:8102/oauth/token",
+                contentType: "application/x-www-form-urlencoded;charset=utf-8",
+                data: {grant_type: 'password',client_id: 'client-app',client_secret:123456,username: 'admin',password: '123456'},
+                dataType: "json",
+                success:function(result){
+                    console.log(result);
+                    test(result.data.tokenHead + result.data.token);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error(jqXHR);
+                    console.error(textStatus);
+                    console.error(errorThrown);
+                }
+            });
+        });
+    });
+
+    function validate() {
+        console.log("校验参数");
+    }
+
+    function test(token) {
+        console.log("token为: " + token);
+        $.ajax({
+            type:"get",
+            dataType: "json",
+            crossDomain: true,
+            xhrFields: {
+                withCredentials: true
+            },
+            beforeSend: function(request) {
+                // request.setRequestHeader("Authorization", sessionStorage.getItem("Authorization"));
+                request.setRequestHeader("Authorization", token);
+                console.log("Authorization: " + token);
+            },
+            // url:"http://localhost:8102/jonesun-user-api/api/hello",
+            // url:"http://localhost:8102/jonesun-user-api/api/currentUser",
+            url:"http://localhost:8102/jonesun-user-api/api/currentUser",
+            success:function(data){
+                console.log("请求成功")
+                console.log(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("异常处理");
+                console.error(jqXHR);
+                console.error(textStatus);
+                console.error(errorThrown);
+                // if(jqXHR.status === 403) {
+                //     //可以编写一个公共js, 遇到接口返回需要登录时统一跳转到登录页
+                //     $(location).attr('href', 'login.html');
+                // }
+            }
+        });
+    }
+</script>
+</body>
+</html>

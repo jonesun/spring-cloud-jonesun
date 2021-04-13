@@ -69,6 +69,17 @@ spring:
             - Path=/oauth/authorize
           filters:
             - PreserveHostHeader
+
+      # 网关跨域配置
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+#            allowedOrigins: "docs.spring.io"
+#            allowedOrigins: "*"
+            allowedOriginPatterns: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true
   security:
     oauth2:
       resourceserver:

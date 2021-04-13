@@ -16,9 +16,12 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.function.BiConsumer;
 
 /**
  * 自定义返回结果：没有登录或token过期时
+ *
  * @author jone.sun
  * 2021/4/12 13:03
  */
@@ -32,9 +35,23 @@ public class RestAuthenticationEntryPoint implements ServerAuthenticationEntryPo
         ServerHttpResponse response = exchange.getResponse();
         response.setStatusCode(HttpStatus.OK);
         response.getHeaders().add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-        String body= JSONUtil.toJsonStr(CommonResult.unauthorized(e.getMessage()));
-        logger.info(body);
-        DataBuffer buffer =  response.bufferFactory().wrap(body.getBytes(StandardCharsets.UTF_8));
+        String body = JSONUtil.toJsonStr(CommonResult.unauthorized(e.getMessage()));
+
+        logger.info("url->{} body: {}", exchange.getRequest().getPath(), body);
+//        exchange.getRequest().getHeaders().forEach(new BiConsumer<String, List<String>>() {
+//            @Override
+//            public void accept(String s, List<String> strings) {
+//                logger.info("requestHeader->{} values: {}", s, JSONUtil.toJsonStr(strings));
+//            }
+//        });
+//        exchange.getResponse().getHeaders().forEach(new BiConsumer<String, List<String>>() {
+//            @Override
+//            public void accept(String s, List<String> strings) {
+//                logger.info("responseHeader->{} values: {}", s, JSONUtil.toJsonStr(strings));
+//            }
+//        });
+
+        DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(StandardCharsets.UTF_8));
         return response.writeWith(Mono.just(buffer));
     }
 }

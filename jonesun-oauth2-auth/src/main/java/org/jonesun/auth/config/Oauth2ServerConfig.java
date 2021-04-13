@@ -93,11 +93,11 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.allowFormAuthenticationForClients();
-//        security
-//                .tokenKeyAccess("permitAll()")
-//                .checkTokenAccess("permitAll()")
-//                .allowFormAuthenticationForClients();
+//        security.allowFormAuthenticationForClients();
+        security
+                .tokenKeyAccess("permitAll()")
+                .checkTokenAccess("permitAll()")
+                .allowFormAuthenticationForClients();
     }
 
     @Bean
