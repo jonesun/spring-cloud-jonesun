@@ -36,8 +36,11 @@ public class RestAuthenticationEntryPoint implements ServerAuthenticationEntryPo
         response.setStatusCode(HttpStatus.OK);
         response.getHeaders().add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         String body = JSONUtil.toJsonStr(CommonResult.unauthorized(e.getMessage()));
+        response.getHeaders().set(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+        response.getHeaders().set(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "*");
+        response.getHeaders().set(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "*");
 
-        logger.info("url->{} body: {}", exchange.getRequest().getPath(), body);
+        logger.info("url->{} method: {} body: {}", exchange.getRequest().getPath(),  exchange.getRequest().getMethod(), body);
 //        exchange.getRequest().getHeaders().forEach(new BiConsumer<String, List<String>>() {
 //            @Override
 //            public void accept(String s, List<String> strings) {

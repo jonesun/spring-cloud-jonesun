@@ -27,8 +27,8 @@
     $(function () {
         $('#loginForm').ajaxForm({
             beforeSubmit: validate,
-            xhrFields: {withCredentials: true},    //前端适配：允许session跨域
-            crossDomain: true,
+            // xhrFields: {withCredentials: true},    //前端适配：允许session跨域
+            // crossDomain: true,
             success: function(result) {
                 //返回数据处理
                 console.log(result);
@@ -43,10 +43,10 @@
         $("#myBtn").click(function(){
             $.ajax({
                 type:"post",
-                crossDomain: true,
-                xhrFields: {
-                    withCredentials: true
-                },
+                // crossDomain: true,
+                // xhrFields: {
+                //     withCredentials: true
+                // },
                 url:"http://localhost:8102/oauth/token",
                 contentType: "application/x-www-form-urlencoded;charset=utf-8",
                 data: {grant_type: 'password',client_id: 'client-app',client_secret:123456,username: 'admin',password: '123456'},
@@ -73,10 +73,10 @@
         $.ajax({
             type:"get",
             dataType: "json",
-            crossDomain: true,
-            xhrFields: {
-                withCredentials: true
-            },
+            // crossDomain: true,
+            // xhrFields: {
+            //     withCredentials: true
+            // },
             beforeSend: function(request) {
                 // request.setRequestHeader("Authorization", sessionStorage.getItem("Authorization"));
                 request.setRequestHeader("Authorization", token);

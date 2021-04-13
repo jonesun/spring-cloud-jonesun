@@ -33,9 +33,12 @@ public class RestfulAccessDeniedHandler implements ServerAccessDeniedHandler {
         ServerHttpResponse response = exchange.getResponse();
         response.setStatusCode(HttpStatus.OK);
         response.getHeaders().add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+        response.getHeaders().set(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+        response.getHeaders().set(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "*");
+        response.getHeaders().set(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "*");
 
         String body = JSONUtil.toJsonStr(CommonResult.forbidden(denied.getMessage()));
-        logger.info("url->{} body: {}", exchange.getRequest().getPath(), body);
+        logger.info("url->{} method: {} body: {}", exchange.getRequest().getPath(), exchange.getRequest().getMethod(), body);
         DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(StandardCharsets.UTF_8));
         return response.writeWith(Mono.just(buffer));
     }
