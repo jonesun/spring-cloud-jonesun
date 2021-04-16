@@ -38,24 +38,6 @@ java -Dserver.port=8105 -Dcsp.sentinel.dashboard.server=localhost:8105 -Dproject
 
 端口：8104
 
-# jonesun-demo 测试样例
-
-```shell
-npm i -g cnpm --registry=https://registry.npm.taobao.org
-
-npm i -g vue-cli
-
-vue -V
-
-vue init webpack vuedemo
-
-npm run dev
-
-npm install axios -S
-
-npm install --save iview
-```
-
 # jonesun-oauth2-auth 认证服务
 
 端口 8106
@@ -109,7 +91,23 @@ Content-Type: application/x-www-form-urlencoded
 grant_type=refresh_token&client_id=client-app&client_secret=123456&refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInVzZXJfbmFtZSI6ImFkbWluIiwic2NvcGUiOlsiYWxsIl0sImF0aSI6IjU1ZDIxMTU0LWJjNjMtNDgyYy1iOTY1LTZhNzA1MjU4NDQxZCIsImlkIjoxLCJleHAiOjE2MTgzMDMxNTIsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjAyNGI5N2Y4LTMwNzYtNDFkMy1iN2UyLTM1YTI1NWRkZGMxMCIsImNsaWVudF9pZCI6ImNsaWVudC1hcHAifQ.GUa--pBNN3JREEWzT4Qfq6HihKNU-rpJ_mZcejEIBqOmAvdW18sWwL5SubqlnF7-glDqq_FS1en7qFYIQ1knD17xHc9xVLzMqivODDxC35DPpHiBd8slt2kHGUfpRB7ITb3YGBomrpmRGvbm0hTYWg39EbPX9aWAM_xqOfjGxSydRBoZyztVESe7CkME-HiE2H0k-cUN7VbDhDzbn2sLxLnj8lYorsBILtEs8_oeTsThydeT4UYWI0zSafP82mFGmRDZqF7Qa5zDXWucvJDfqZEMN_P_EJjMkzl6D3i0bTqjcQy3QRe2GtDaG43bHOLrwIa1qgvSH-Sed6A-QEQm9g
 ```
 
-# jonesun-demo
+# jonesun-demo 测试样例
+
+```shell
+npm i -g cnpm --registry=https://registry.npm.taobao.org
+
+npm i -g vue-cli
+
+vue -V
+
+vue init webpack vuedemo
+
+npm run dev
+
+npm install axios -S
+
+npm install --save iview
+```
 
 ## fore-demo 
 
