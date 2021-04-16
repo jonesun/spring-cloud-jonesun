@@ -87,18 +87,42 @@
 <script>
 export default {
   name: 'HelloWorld',
+  created() {
+    console.log('created Event  --> Goto init()')
+    this.init()
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
   },
   methods: {
+    init: function () {
+      this.$api.api_all.get_current_user_api()
+        .then((response)=>{
+          console.log(response);
+          var username = response.data.username;
+          if(username == null) {
+            this.$router.push("/login") // 跳转到首页
+          } else {
+            this.msg = username;
+          }
+        }).catch((error)=>{
+          console.log(error);
+          this.$Message.error("发生异常");
+          this.$router.push("/login") // 跳转到首页
+      })
+
+    },
     testHttp: function (event) {
-      // `this` 在方法里指向当前 Vue 实例
-      this.$axios
-        .get('http://localhost:8102/jonesun-user-api/api/users')
-        .then(response => (console.log(response)))
-        .catch(error => (console.log(error)))
+      this.$api.api_all.get_users_api()
+        .then((response)=>{
+          console.log(response);
+        }).catch((error)=>{
+          console.log(error);
+          this.$Message.error(error);
+          this.$router.push("/login") // 跳转到首页
+      })
     }
   }
 }
