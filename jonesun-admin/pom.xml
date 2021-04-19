@@ -14,6 +14,7 @@
     <properties>
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
+        <start-class>org.jonesun.admin.JonesunAdminServerApplication</start-class>
     </properties>
 
     <dependencies>
@@ -44,5 +45,15 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
 
 </project>

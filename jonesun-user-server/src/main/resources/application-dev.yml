@@ -35,6 +35,16 @@ management:
     health:
       show-details: always
 
+info:
+  version: @project.version@
+  name: @project.artifactId@
+  group: @project.groupId@
+  description: @project.description@
+  #自定义信息
+  author: jone sun
+  blog: https://jonesun.github.io/
+
+
 logging:
   file:
     name: boot.log

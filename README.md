@@ -13,12 +13,6 @@ startup.cmd -m standalone
 
 http://127.0.0.1:8848/nacos/
 
-启动sentinel
-
-```shell
-java -Dserver.port=8105 -Dcsp.sentinel.dashboard.server=localhost:8105 -Dproject.name=sentinel-dashboard -jar sentinel-dashboard-1.8.1.jar
-
-```
 
 启动redis
 
@@ -37,6 +31,16 @@ java -Dserver.port=8105 -Dcsp.sentinel.dashboard.server=localhost:8105 -Dproject
 # jonesun-user-api 对外服务
 
 端口：8104
+
+application.yml 已移入到nacos 中，新建配置且Data ID命名为：jonesun-user-api.yml
+
+# sentinel dashboard
+启动sentinel dashboard
+
+```shell
+java -Dserver.port=8105 -Dcsp.sentinel.dashboard.server=localhost:8105 -Dproject.name=sentinel-dashboard -jar sentinel-dashboard-1.8.1.jar
+
+```
 
 # jonesun-oauth2-auth 认证服务
 
