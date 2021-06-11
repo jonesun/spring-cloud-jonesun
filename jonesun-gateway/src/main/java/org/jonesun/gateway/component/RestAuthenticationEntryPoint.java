@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -40,6 +41,11 @@ public class RestAuthenticationEntryPoint implements ServerAuthenticationEntryPo
         response.getHeaders().set(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "*");
         response.getHeaders().set(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "*");
 
+
+        if (exchange.getRequest().getMethod() == HttpMethod.OPTIONS) {
+            response.setStatusCode(HttpStatus.OK);
+            return Mono.empty();
+        }
         logger.info("url->{} method: {} body: {}", exchange.getRequest().getPath(),  exchange.getRequest().getMethod(), body);
 //        exchange.getRequest().getHeaders().forEach(new BiConsumer<String, List<String>>() {
 //            @Override

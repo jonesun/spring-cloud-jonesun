@@ -1,5 +1,5 @@
 ![](https://img.shields.io/badge/spring--cloud--jonesun-v1.0.0-blue)
-[![](https://img.shields.io/github/stars/hxrui/spring-cloud-jonesun.svg?style=social&label=Stars)](https://github.com/jonesun/spring-cloud-jonesun/stargazers)
+[![](https://img.shields.io/github/stars/jonesun/spring-cloud-jonesun.svg?style=social&label=Stars)](https://github.com/jonesun/spring-cloud-jonesun/stargazers)
 ![](https://img.shields.io/badge/SpringBoot-2.4.4-brightgreen.svg)
 ![](https://img.shields.io/badge/SpringCloud-2020-green.svg)
 ![](https://img.shields.io/badge/SpringCloudAlibaba-2020-green.svg)
